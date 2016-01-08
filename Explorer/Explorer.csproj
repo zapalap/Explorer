@@ -74,6 +74,7 @@
     <Compile Include="Infrastructure\Helpers\EntityMoveHelper.cs" />
     <Compile Include="Infrastructure\Helpers\IMoveHelper.cs" />
     <Compile Include="Infrastructure\IGraphicsComponent.cs" />
+    <Compile Include="Infrastructure\Map\GeneratedTileFactory.cs" />
     <Compile Include="Infrastructure\Map\ITileFactory.cs" />
     <Compile Include="Infrastructure\Map\MapLoader.cs" />
     <Compile Include="Infrastructure\Map\TestMapFactory.cs" />

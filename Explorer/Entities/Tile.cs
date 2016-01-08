@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Explorer.Entities
 {
-    public class Tile
+    public class Tile : BaseEntity
     {
         public string Name { get; set; }
         public BaseEntity Occupant { get; set; }

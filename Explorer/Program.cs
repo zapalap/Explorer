@@ -54,7 +54,7 @@ namespace Explorer
             var gameLog = new GameLog() { X = 1, Y = 60 };
 
             world.Player = player;
-            world.Map = MapLoader.LoadMap(new TestMapFactory());
+            world.Map = MapLoader.LoadMap(new GeneratedTileFactory());
 
             var monsterView = new MonsterView(graphics);
             var playerView = new PlayerView(graphics);
