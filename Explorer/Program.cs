@@ -50,7 +50,7 @@ namespace Explorer
             };
 
 
-            var player = new Player() { X = 10, Y = 15, EnergyDelta = 300 };
+            var player = new Player() { X = 10, Y = 15, EnergyDelta = 500 };
             var gameLog = new GameLog() { X = 1, Y = 60 };
 
             world.Player = player;
@@ -97,12 +97,7 @@ namespace Explorer
                 if (console.KeyPressed)
                 {
                     input.Handle(frameContext, console.GetKey());
-                }
-
-                while (lag >= 16)
-                {
                     engine.Update(frameContext);
-                    lag -= 16;
                 }
 
                 engine.Render();
