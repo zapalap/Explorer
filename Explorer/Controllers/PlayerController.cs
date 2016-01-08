@@ -34,7 +34,7 @@ namespace Explorer.Controllers
 
                 if (!wasClear)
                 {
-                    GameLog.AddMessage("Ouch!", Color4.Red);
+                    GameLog.AddMessage("Blocked!", Color4.LightPink);
                 }
                 else if (Model.OldX != Model.X || Model.OldY != Model.Y)
                 {

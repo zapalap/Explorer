@@ -12,6 +12,7 @@ namespace Explorer.Views
     public class GameLogView : IView<GameLog>
     {
         private IGraphicsComponent Graphics;
+        private const int MaxDisplayed = 20;
 
         public GameLogView(IGraphicsComponent graphics)
         {
@@ -22,23 +23,29 @@ namespace Explorer.Views
         {
             if (model.HasNew())
             {
-                int x = 0;
+                ClearLog(model);
+                int y = 0;
                 var messages = model.GetMessages();
+                var color = Color4.White;
                 messages.Reverse();
-                Color4 color = Color4.Green;
                 foreach (var message in messages)
                 {
-                    if (x > 0)
-                    {
-                        color = message.Color;
-                    }
-                    Graphics.Write(model.X, model.Y + x++, message.Message, color);
+                    color = message.Color;
+                    Graphics.Write(model.X, model.Y + y++, message.Message, color);
 
-                    if (x > 10)
+                    if (y > MaxDisplayed)
                     {
                         break;
                     }
                 }
+            }
+        }
+
+        private void ClearLog(GameLog model)
+        {
+            for (int y = 0; y <= MaxDisplayed; y++)
+            {
+                Graphics.Write(model.X, model.Y + y, "                                                                                                                        ", Color4.Black);
             }
         }
     }
