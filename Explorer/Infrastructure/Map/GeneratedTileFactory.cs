@@ -12,7 +12,7 @@ namespace Explorer.Infrastructure.Map
         private Tile[,] Map;
         private Random Random;
 
-        private const int mapWidth = 40;
+        private const int mapWidth = 60;
         private const int mapHeight = 40;
 
         public GeneratedTileFactory()
@@ -27,7 +27,7 @@ namespace Explorer.Infrastructure.Map
 
             var wall = new Tile();
 
-            for (int i = 0; i < 3000; i++)
+            for (int i = 0; i < 200; i++)
             {
                 wall = PickAWall();
 
@@ -86,7 +86,7 @@ namespace Explorer.Infrastructure.Map
 
         private Tile PickAWall()
         {
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 0; i < 1600; i++)
             {
                 var x = Random.Next(1, mapWidth-1);
                 var y = Random.Next(1, mapHeight-1);
