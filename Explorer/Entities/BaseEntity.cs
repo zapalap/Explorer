@@ -14,6 +14,7 @@ namespace Explorer.Entities
         public int OldY { get; set; }
         public int EnergyDelta { get; set; }
         public int Energy { get; set; }
+        public bool Visible { get; set; } = false;
 
         public bool IsReadyToAct()
         {

@@ -12,6 +12,9 @@ namespace Explorer.Infrastructure.Map
         private Tile[,] Map;
         private Random Random;
 
+        private const int mapWidth = 40;
+        private const int mapHeight = 40;
+
         public GeneratedTileFactory()
         {
             Random = new Random();
@@ -41,11 +44,11 @@ namespace Explorer.Infrastructure.Map
 
         private void InitializeMap()
         {
-            Map = new Tile[160, 60];
+            Map = new Tile[mapWidth, mapHeight];
 
-            for (int x = 0; x < 160; x++)
+            for (int x = 0; x < mapWidth; x++)
             {
-                for (int y = 0; y < 60; y++)
+                for (int y = 0; y < mapHeight; y++)
                 {
                     Map[x, y] = new Tile() { Name = "MapTile", X=x, Y=y, Furniture = new Furniture() { Name = "Wall", Blocking = true, X = x, Y = y } };
                 }
@@ -85,8 +88,8 @@ namespace Explorer.Infrastructure.Map
         {
             for (int i = 0; i < 1000000; i++)
             {
-                var x = Random.Next(1, 159);
-                var y = Random.Next(1, 59);
+                var x = Random.Next(1, mapWidth-1);
+                var y = Random.Next(1, mapHeight-1);
 
                 if (Map[x,y].Furniture.Blocking &&
                     (!Map[x + 1, y].Furniture.Blocking

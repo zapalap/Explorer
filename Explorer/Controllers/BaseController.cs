@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Explorer.Models;
 using Explorer.Views;
 using Explorer.Entities;
+using Explorer.Infrastructure.Fov;
 
 namespace Explorer.Controllers
 {
-    public abstract class BaseController<T> : IController
+    public abstract class BaseController<T> : IController where T : BaseEntity
     {
         protected T Model;
         protected IView<T> View;
@@ -24,6 +25,7 @@ namespace Explorer.Controllers
 
         public virtual void Draw()
         {
+            
             View.Draw(Model);
         }
 

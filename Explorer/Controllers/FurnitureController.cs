@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Explorer.Models;
 using Explorer.Views;
 using Explorer.Infrastructure.Helpers;
+using Explorer.Infrastructure.Fov;
 
 namespace Explorer.Controllers
 {
@@ -17,6 +18,12 @@ namespace Explorer.Controllers
         public FurnitureController(Furniture furniture, IView<Furniture> view, World world, ILogController gameLog) : base(furniture, view, world)
         {
             GameLog = gameLog;
+        }
+
+        public override void Draw()
+        {
+            Model.Visible = World.Map.Tiles[Model.X, Model.Y].Visible;
+            View.Draw(Model);
         }
 
         public override void Update(FrameContext frameContext)

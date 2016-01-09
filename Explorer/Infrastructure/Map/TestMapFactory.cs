@@ -11,12 +11,12 @@ namespace Explorer.Infrastructure.Map
     {
         public Tile[,] GetTiles()
         {
-            var tiles = new Tile[160, 60];
+            var tiles = new Tile[40, 40];
             var rnd = new Random();
 
-            for (int x = 0; x < 160; x++)
+            for (int x = 0; x < 40; x++)
             {
-                for (int y = 0; y < 60; y++)
+                for (int y = 0; y < 40; y++)
                 {
                     int r = rnd.Next(0, 10);
                     var blocking =  r < 9 ? false : true;

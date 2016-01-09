@@ -1,4 +1,5 @@
 ﻿using Explorer.Entities;
+using Explorer.Infrastructure.Fov;
 using Explorer.Infrastructure.Helpers;
 using Explorer.Models;
 using Explorer.Views;

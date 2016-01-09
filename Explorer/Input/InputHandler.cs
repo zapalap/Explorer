@@ -1,6 +1,7 @@
 ﻿using Explorer.Infrastructure.Enums;
 using Explorer.Models;
 using OpenTK.Input;
+using SunshineConsole;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,27 +10,46 @@ using System.Threading.Tasks;
 
 namespace Explorer.Input
 {
-    public class InputHandler
+    public class InputHandler : IInputHandler
     {
-        public void Handle(FrameContext frameContext, Key key)
+        private ConsoleWindow Console;
+
+        public InputHandler(ConsoleWindow console)
         {
-            switch (key)
+            Console = console;
+        }
+
+        public bool Handle(FrameContext frameContext)
+        {
+            if (Console.KeyPressed)
             {
-                case Key.W: frameContext.LastPlayerAction = MoveAction.MoveUp;
-                    break;
+                switch (Console.GetKey())
+                {
+                    case Key.W:
+                        frameContext.LastPlayerAction = MoveAction.MoveUp;
+                        break;
 
-                case Key.S: frameContext.LastPlayerAction = MoveAction.MoveDown;
-                    break;
+                    case Key.S:
+                        frameContext.LastPlayerAction = MoveAction.MoveDown;
+                        break;
 
-                case Key.A: frameContext.LastPlayerAction = MoveAction.MoveLeft;
-                    break;
+                    case Key.A:
+                        frameContext.LastPlayerAction = MoveAction.MoveLeft;
+                        break;
 
-                case Key.D: frameContext.LastPlayerAction = MoveAction.MoveRight;
-                    break;
+                    case Key.D:
+                        frameContext.LastPlayerAction = MoveAction.MoveRight;
+                        break;
 
-                default:
-                    frameContext.LastPlayerAction = MoveAction.Idle;
-                    break;
+                    default:
+                        frameContext.LastPlayerAction = MoveAction.Idle;
+                        break;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Explorer.Infrastructure.Enums;
+﻿using Explorer.Entities;
+using Explorer.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Explorer.Models
     public class FrameContext
     {
         public MoveAction LastPlayerAction { get; set; }
+        public World World { get; set; }
     }
 }

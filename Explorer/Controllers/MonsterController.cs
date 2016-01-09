@@ -1,5 +1,6 @@
 ﻿using Explorer.Entities;
 using Explorer.Infrastructure.Enums;
+using Explorer.Infrastructure.Fov;
 using Explorer.Infrastructure.Helpers;
 using Explorer.Models;
 using Explorer.Views;
@@ -22,6 +23,12 @@ namespace Explorer.Controllers
             MoveHelper = moveHelper;
             GameLog = gameLog;
             Random = new Random();
+        }
+
+        public override void Draw()
+        {
+            Model.Visible = World.Map.Tiles[Model.X, Model.Y].Visible;
+            View.Draw(Model);
         }
 
         public override void Update(FrameContext frameContext)

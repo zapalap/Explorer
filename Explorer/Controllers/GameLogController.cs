@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Explorer.Models;
 using Explorer.Views;
 using OpenTK.Graphics;
+using Explorer.Infrastructure.Fov;
 
 namespace Explorer.Controllers
 {

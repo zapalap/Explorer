@@ -20,8 +20,10 @@ namespace Explorer.Views
 
         public void Draw(Creature model)
         {
-            Graphics.Write(model.X, model.Y, "M", Color4.PaleVioletRed);
+            if (model.Visible)
+            {
+                Graphics.Write(model.X, model.Y, "M", Color4.PaleVioletRed);
+            }
         }
-
     }
 }
