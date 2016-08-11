@@ -71,6 +71,8 @@
     <Compile Include="Infrastructure\Bootstrapper.cs" />
     <Compile Include="Infrastructure\Engine.cs" />
     <Compile Include="Infrastructure\Enums\PlayerAction.cs" />
+    <Compile Include="Infrastructure\Fov\AlwaysVisibleFovStrategy.cs" />
+    <Compile Include="Infrastructure\Fov\RayCastFovStrategy.cs" />
     <Compile Include="Infrastructure\Fov\RecursiveShadowcastingFovStrategy.cs" />
     <Compile Include="Infrastructure\Helpers\EnergyHelper.cs" />
     <Compile Include="Infrastructure\Helpers\EntityMoveHelper.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Infrastructure\Map\GeneratedTileFactory.cs" />
     <Compile Include="Infrastructure\Map\ITileFactory.cs" />
     <Compile Include="Infrastructure\Map\MapLoader.cs" />
+    <Compile Include="Infrastructure\Map\NaturalCaveCaTileFactory.cs" />
     <Compile Include="Infrastructure\Map\TestMapFactory.cs" />
     <Compile Include="Input\IInputHandler.cs" />
     <Compile Include="Input\InputHandler.cs" />

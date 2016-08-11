@@ -48,14 +48,16 @@ namespace Explorer.Infrastructure
 
             //world.Creatures = monsters;
             world.Player = player;
-            world.Map = MapLoader.LoadMap(new GeneratedTileFactory());
+            world.Map = MapLoader.LoadMap(new NaturalCaveCaTileFactory());
 
             var monsterView = new MonsterView(graphics);
             var playerView = new PlayerView(graphics);
             var furnitureView = new FurnitureView(graphics);
             var gameLogView = new GameLogView(graphics);
 
-            var fovStrategy = new RecursiveShadowcastingFovStrategy();
+            //var fovStrategy = new RecursiveShadowcastingFovStrategy();
+
+            var fovStrategy = new AlwaysVisibleFovStrategy();
             var input = new InputHandler(console);
 
             var gameLogController = new GameLogController(gameLog, gameLogView, world);

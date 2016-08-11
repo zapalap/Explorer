@@ -12,7 +12,7 @@ namespace Explorer.Infrastructure.Map
         private Tile[,] Map;
         private Random Random;
 
-        private const int mapWidth = 60;
+        private const int mapWidth = 160;
         private const int mapHeight = 40;
 
         public GeneratedTileFactory()
