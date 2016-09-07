@@ -26,23 +26,27 @@ namespace Explorer.Input
                 switch (Console.GetKey())
                 {
                     case Key.W:
-                        frameContext.LastPlayerAction = MoveAction.MoveUp;
+                        frameContext.LastPlayerAction = Intent.MoveUp;
                         break;
 
                     case Key.S:
-                        frameContext.LastPlayerAction = MoveAction.MoveDown;
+                        frameContext.LastPlayerAction = Intent.MoveDown;
                         break;
 
                     case Key.A:
-                        frameContext.LastPlayerAction = MoveAction.MoveLeft;
+                        frameContext.LastPlayerAction = Intent.MoveLeft;
                         break;
 
                     case Key.D:
-                        frameContext.LastPlayerAction = MoveAction.MoveRight;
+                        frameContext.LastPlayerAction = Intent.MoveRight;
+                        break;
+
+                    case Key.R:
+                        frameContext.LastPlayerAction = Intent.RegenerateMap;
                         break;
 
                     default:
-                        frameContext.LastPlayerAction = MoveAction.Idle;
+                        frameContext.LastPlayerAction = Intent.Idle;
                         break;
                 }
                 return true;

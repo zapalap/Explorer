@@ -14,10 +14,10 @@ namespace Explorer.Controllers
 {
     public class PlayerController : BaseController<Player>
     {
-        private EntityMoveHelper MoveHelper;
+        private IMoveHelper MoveHelper;
         private ILogController GameLog;
 
-        public PlayerController(Player player, IView<Player> view, World world, EntityMoveHelper moveHelper, ILogController gameLog) : base(player, view, world)
+        public PlayerController(Player player, IView<Player> view, World world, IMoveHelper moveHelper, ILogController gameLog) : base(player, view, world)
         {
             MoveHelper = moveHelper;
             GameLog = gameLog;
@@ -31,7 +31,7 @@ namespace Explorer.Controllers
             {
                 var wasClear = MoveHelper.Move(Model, frameContext.LastPlayerAction);
 
-                frameContext.LastPlayerAction = Infrastructure.Enums.MoveAction.Idle;
+                //frameContext.LastPlayerAction = Infrastructure.Enums.Intent.Idle;
 
                 if (!wasClear)
                 {

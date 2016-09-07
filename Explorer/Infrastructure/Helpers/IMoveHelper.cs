@@ -10,6 +10,6 @@ namespace Explorer.Infrastructure.Helpers
 {
     public interface IMoveHelper
     {
-        bool Move(BaseEntity entity, MoveAction action);
+        bool Move(BaseEntity entity, Enums.Intent action);
     }
 }

@@ -21,25 +21,25 @@ namespace Explorer.Infrastructure.Helpers
             GameLog = gameLog;
         }
 
-        public bool Move(BaseEntity entity, MoveAction action)
+        public bool Move(BaseEntity entity, Enums.Intent action)
         {
             entity.OldY = entity.Y;
             entity.OldX = entity.X;
 
             switch (action)
             {
-                case Infrastructure.Enums.MoveAction.Idle:
+                case Infrastructure.Enums.Intent.Idle:
                     break;
-                case Infrastructure.Enums.MoveAction.MoveUp:
+                case Infrastructure.Enums.Intent.MoveUp:
                     entity.Y -= 1;
                     break;
-                case Infrastructure.Enums.MoveAction.MoveDown:
+                case Infrastructure.Enums.Intent.MoveDown:
                     entity.Y += 1;
                     break;
-                case Infrastructure.Enums.MoveAction.MoveRight:
+                case Infrastructure.Enums.Intent.MoveRight:
                     entity.X += 1;
                     break;
-                case Infrastructure.Enums.MoveAction.MoveLeft:
+                case Infrastructure.Enums.Intent.MoveLeft:
                     entity.X -= 1;
                     break;
                 default: return false;

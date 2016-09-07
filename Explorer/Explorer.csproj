@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iv">
+      <HintPath>..\packages\Iv.0.0.1\Iv.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.Next.1.1.1612.8936\lib\net20\OpenTK.dll</HintPath>
       <Private>True</Private>
@@ -53,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\FurnitureController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\GameLogController.cs" />
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Controllers\ILogController.cs" />
@@ -90,7 +93,7 @@
     <Compile Include="Entities\GameLog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\FurnitureView.cs" />
+    <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\GameLogView.cs" />
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\MonsterView.cs" />

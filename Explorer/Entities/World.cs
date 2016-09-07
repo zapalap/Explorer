@@ -8,16 +8,15 @@ namespace Explorer.Entities
 {
     public class World
     {
+
         public List<Creature> Creatures { get; set; }
         public Player Player { get; set; }
         public LevelMap Map { get; set; }
 
         public World()
         {
-            if (Creatures == null)
-            {
-                Creatures = new List<Creature>();
-            }
+            Creatures = new List<Creature>();
+            Map = new LevelMap();
         }
     }
 }

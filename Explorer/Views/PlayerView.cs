@@ -18,6 +18,16 @@ namespace Explorer.Views
             Graphics = graphics;
         }
 
+        public void Clear()
+        {
+            Graphics.Clear();
+        }
+
+        public void Clear(Player model)
+        {
+            Graphics.Clear();
+        }
+
         public void Draw(Player player)
         {
             Graphics.Write(player.X, player.Y, "@", Color4.Yellow);

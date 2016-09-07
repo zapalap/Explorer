@@ -12,6 +12,7 @@ namespace Explorer.Infrastructure.Map
         public static LevelMap LoadMap(ITileFactory tileFactory)
         {
             var levelMap = new LevelMap() { Name = "Test Map", Tiles = tileFactory.GetTiles()};
+            levelMap.Id = Guid.NewGuid();
             return levelMap;
         }
     }

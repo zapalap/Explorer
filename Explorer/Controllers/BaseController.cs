@@ -25,7 +25,6 @@ namespace Explorer.Controllers
 
         public virtual void Draw()
         {
-            
             View.Draw(Model);
         }
 

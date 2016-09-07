@@ -18,6 +18,16 @@ namespace Explorer.Views
             Graphics = graphics;
         }
 
+        public void Clear()
+        {
+            Graphics.Clear();
+        }
+
+        public void Clear(Creature model)
+        {
+            Graphics.Clear();
+        }
+
         public void Draw(Creature model)
         {
             if (model.Visible)

@@ -21,5 +21,16 @@ namespace Explorer.Infrastructure
         {
             ConsoleWindow.Write(y, x, message, color);
         }
+
+        public void Clear()
+        {
+            for (int x = 0; x < ConsoleWindow.Cols-1; x++)
+            {
+                for (int y = 0; y < ConsoleWindow.Rows - 1; y++)
+                {
+                    Write(x, y, " ", Color4.Black);
+                }
+            }
+        }
     }
 }

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Explorer.Infrastructure.Enums
 {
-    public enum MoveAction
+    public enum Intent
     {
         Idle,
         MoveUp,
         MoveDown,
         MoveRight,
-        MoveLeft
+        MoveLeft,
+        RegenerateMap
     }
 }

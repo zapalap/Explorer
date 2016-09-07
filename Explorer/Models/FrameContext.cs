@@ -10,7 +10,7 @@ namespace Explorer.Models
 {
     public class FrameContext
     {
-        public MoveAction LastPlayerAction { get; set; }
+        public Intent LastPlayerAction { get; set; }
         public World World { get; set; }
     }
 }

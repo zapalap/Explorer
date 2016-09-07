@@ -10,5 +10,6 @@ namespace Explorer.Infrastructure
     public interface IGraphicsComponent
     {
         void Write(int x, int y, string message, Color4 color);
+        void Clear();
     }
 }

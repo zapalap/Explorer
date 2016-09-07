@@ -11,5 +11,6 @@ namespace Explorer.Controllers
     {
         void AddMessage(string message);
         void AddMessage(string message, Color4 color);
+        void Draw();
     }
 }

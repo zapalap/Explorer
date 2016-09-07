@@ -9,5 +9,7 @@ namespace Explorer.Views
     public interface IView<T>
     {
         void Draw(T model);
+        void Clear();
+        void Clear(T model);
     }
 }

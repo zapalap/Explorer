@@ -23,7 +23,7 @@ namespace Explorer.Views
         {
             if (model.HasNew())
             {
-                ClearLog(model);
+                Clear(model);
                 int y = 0;
                 var messages = model.GetMessages();
                 var color = Color4.White;
@@ -41,7 +41,12 @@ namespace Explorer.Views
             }
         }
 
-        private void ClearLog(GameLog model)
+        public void Clear()
+        {
+
+        }
+
+        public void Clear(GameLog model)
         {
             for (int y = 0; y <= MaxDisplayed; y++)
             {

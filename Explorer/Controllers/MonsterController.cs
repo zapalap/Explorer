@@ -14,11 +14,11 @@ namespace Explorer.Controllers
 {
     public class MonsterController : BaseController<Creature>
     {
-        private EntityMoveHelper MoveHelper;
+        private IMoveHelper MoveHelper;
         private Random Random;
         private ILogController GameLog;
 
-        public MonsterController(Creature monster, IView<Creature> view, World world, EntityMoveHelper moveHelper, ILogController gameLog) : base(monster, view, world)
+        public MonsterController(Creature monster, IView<Creature> view, World world, IMoveHelper moveHelper, ILogController gameLog) : base(monster, view, world)
         {
             MoveHelper = moveHelper;
             GameLog = gameLog;
@@ -41,22 +41,22 @@ namespace Explorer.Controllers
 
                 if (direction < 20)
                 {
-                    MoveHelper.Move(Model, MoveAction.MoveUp);
+                    MoveHelper.Move(Model, Infrastructure.Enums.Intent.MoveUp);
                 }
 
                 if (direction > 20 && direction < 40)
                 {
-                    MoveHelper.Move(Model, MoveAction.MoveDown);
+                    MoveHelper.Move(Model, Infrastructure.Enums.Intent.MoveDown);
                 }
 
                 if (direction > 40 && direction < 60)
                 {
-                    MoveHelper.Move(Model, MoveAction.MoveLeft);
+                    MoveHelper.Move(Model, Infrastructure.Enums.Intent.MoveLeft);
                 }
 
                 if (direction > 60)
                 {
-                    MoveHelper.Move(Model, MoveAction.MoveRight);
+                    MoveHelper.Move(Model, Infrastructure.Enums.Intent.MoveRight);
                 }
             }
         }

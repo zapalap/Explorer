@@ -1,8 +1,10 @@
 ﻿using Explorer.Controllers;
 using Explorer.Entities;
 using Explorer.Infrastructure.Fov;
+using Explorer.Infrastructure.Map;
 using Explorer.Input;
 using Explorer.Models;
+using SunshineConsole;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +16,22 @@ namespace Explorer.Infrastructure
     public class Engine
     {
         private IFovStrategy FovStrategy;
+        private ITileFactory TileFactory;
         private IInputHandler InputHandler;
+        private ConsoleWindow Console;
 
         public List<IController> ActorControllers { get; set; }
         public List<IController> FurnitureControllers { get; set; }
-        public IController GameLogController { get; set; }
+        public ILogController GameLogController { get; private set; }
         public World World { get; private set; }
 
-        public Engine(IFovStrategy fovStrategy, World world, IInputHandler input)
+        public Engine(IFovStrategy fovStrategy, ITileFactory tileFactory, World world, IInputHandler input, ILogController gameLog, ConsoleWindow console)
         {
             FovStrategy = fovStrategy;
+            TileFactory = tileFactory;
             World = world;
             InputHandler = input;
+            Console = console;
 
             if (ActorControllers == null)
             {
@@ -36,10 +42,30 @@ namespace Explorer.Infrastructure
             {
                 FurnitureControllers = new List<IController>();
             }
+
+            GameLogController = gameLog;
+        }
+
+        public void AddActor(Creature creature, IController controller)
+        {
+            World.Creatures.Add(creature);
+            ActorControllers.Add(controller);
+        }
+
+        public void AddFurniture(IController controller)
+        {
+            FurnitureControllers.Add(controller);
+        }
+
+        public bool WindowUpdate()
+        {
+            return Console.WindowUpdate();
         }
 
         public void Update(FrameContext frameContext)
         {
+            HandleSystemCommands(frameContext);
+
             foreach (var actor in ActorControllers)
             {
                 actor.Update(frameContext);
@@ -71,6 +97,14 @@ namespace Explorer.Infrastructure
             }
 
             GameLogController.Draw();
+        }
+
+        private void HandleSystemCommands(FrameContext frameContext)
+        {
+            if (frameContext.LastPlayerAction == Enums.Intent.RegenerateMap)
+            {
+                World.Map = MapLoader.LoadMap(TileFactory);
+            }
         }
 
         public bool HandleInput(FrameContext frameContext)

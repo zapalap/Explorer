@@ -12,8 +12,8 @@ namespace Explorer.Infrastructure.Map
         private Tile[,] Map;
         private Random Random;
 
-        private const int mapWidth = 160;
-        private const int mapHeight = 40;
+        private const int mapWidth = 260;
+        private const int mapHeight = 60;
 
         private const int iterations = 5;
 
@@ -30,7 +30,8 @@ namespace Explorer.Infrastructure.Map
             {
                 for (int y = 0; y < mapHeight; y++)
                 {
-                    if (Random.Next(0, 10) >= 6)
+                    var rnd = Random.Next(0, 10);
+                    if (rnd >= 6)
                     {
                         Map[x, y] = new Tile() { Name = "MapTile", X = x, Y = y, Furniture = new Furniture() { Name = "Wall", Blocking = true, X = x, Y = y } };
                     }

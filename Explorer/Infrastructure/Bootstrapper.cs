@@ -5,6 +5,7 @@ using Explorer.Infrastructure.Helpers;
 using Explorer.Infrastructure.Map;
 using Explorer.Input;
 using Explorer.Views;
+using Iv;
 using SunshineConsole;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,46 @@ namespace Explorer.Infrastructure
 {
     public static class Bootstrapper
     {
-        public static Engine Start(ConsoleWindow console)
-        {
-            var graphics = new AsciiGraphicsComponent(console);
+        public static Container Container = new Container();
 
-            var world = new World();
+        public static Engine Start()
+        {
+            Container.RegisterInstance<ConsoleWindow>(c => new ConsoleWindow(80, 220, "Explorer"));
+            Container.Register<IGraphicsComponent, AsciiGraphicsComponent>();
+
+            Container.RegisterInstance<Player>(c =>
+            {
+                return new Player() { X = 10, Y = 15, EnergyDelta = 500 };
+            });
+
+            Container.Register<ITileFactory, NaturalCaveCaTileFactory>();
+
+            Container.RegisterInstance<World>(c =>
+            {
+                var world = new World();
+                world.Player = c.Resolve<Player>();
+                world.Map = MapLoader.LoadMap(c.Resolve<ITileFactory>());
+                return world;
+            });
+
+            Container.Register<IInputHandler, InputHandler>();
+            Container.Register<IView<Creature>, MonsterView>();
+            Container.Register<IView<Player>, PlayerView>();
+            Container.Register<IView<Furniture>, MapView>();
+            Container.Register<IView<GameLog>, GameLogView>();
+            Container.Register<IFovStrategy, AlwaysVisibleFovStrategy>();
+            
+            Container.Register<PlayerController, PlayerController>();
+
+            Container.RegisterInstance<GameLog>(c =>
+            {
+                return new GameLog { X = 1, Y = 60 };
+            });
+
+            Container.Register<ILogController, GameLogController>();
+            Container.Register<IMoveHelper, EntityMoveHelper>();
+            Container.Register<Engine, Engine>();
+
             var monsters = new List<Creature>()
             {
                 new Creature() { X = 15, Y = 10, EnergyDelta = 100 },
@@ -43,42 +79,23 @@ namespace Explorer.Infrastructure
                 new Creature() { X = 20, Y = 20, EnergyDelta = 500 },
             };
 
-            var player = new Player() { X = 10, Y = 15, EnergyDelta = 500 };
-            var gameLog = new GameLog() { X = 1, Y = 40 };
-
-            //world.Creatures = monsters;
-            world.Player = player;
-            world.Map = MapLoader.LoadMap(new NaturalCaveCaTileFactory());
-
-            var monsterView = new MonsterView(graphics);
-            var playerView = new PlayerView(graphics);
-            var furnitureView = new FurnitureView(graphics);
-            var gameLogView = new GameLogView(graphics);
-
-            //var fovStrategy = new RecursiveShadowcastingFovStrategy();
-
-            var fovStrategy = new AlwaysVisibleFovStrategy();
-            var input = new InputHandler(console);
-
-            var gameLogController = new GameLogController(gameLog, gameLogView, world);
-            var moveHelper = new EntityMoveHelper(world, gameLogController);
-
-            var engine = new Engine(fovStrategy, world, input);
-
-            engine.GameLogController = gameLogController;
+            var engine = Container.Resolve<Engine>();
 
             foreach (var monster in monsters)
             {
-                world.Creatures.Add(monster);
-                engine.ActorControllers.Add(new MonsterController(monster, monsterView, world, moveHelper, gameLogController));
+                var controller = new MonsterController(monster,
+                    Container.Resolve<IView<Creature>>(),
+                    Container.Resolve<World>(),
+                    Container.Resolve<IMoveHelper>(), Container.Resolve<ILogController>());
+
+                engine.AddActor(monster, controller);
             }
 
-            engine.ActorControllers.Add(new PlayerController(player, playerView, world, moveHelper, gameLogController));
+            engine.ActorControllers.Add(Container.Resolve<PlayerController>());
 
-
-            foreach (var tile in world.Map.Tiles)
+            foreach (var tile in engine.World.Map.Tiles)
             {
-                engine.FurnitureControllers.Add(new FurnitureController(tile.Furniture, furnitureView, world, gameLogController));
+                engine.FurnitureControllers.Add(new MapController(tile.Furniture, Container.Resolve<IView<Furniture>>(), Container.Resolve<World>(), Container.Resolve<ILogController>()));
             }
 
             return engine;

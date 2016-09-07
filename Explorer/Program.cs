@@ -21,13 +21,11 @@ namespace Explorer
     {
         static void Main(string[] args)
         {
-            var console = new ConsoleWindow(60, 120, "Explorer");
-
-            var engine = Bootstrapper.Start(console);
+            var engine = Bootstrapper.Start();
 
             var frameContext = new FrameContext() { World = engine.World };
 
-            while (console.WindowUpdate())
+            while (engine.WindowUpdate())
             {
                 if (engine.HandleInput(frameContext))
                 {

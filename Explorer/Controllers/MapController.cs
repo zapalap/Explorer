@@ -11,11 +11,11 @@ using Explorer.Infrastructure.Fov;
 
 namespace Explorer.Controllers
 {
-    public class FurnitureController : BaseController<Furniture>
+    public class MapController : BaseController<Furniture>
     {
         private ILogController GameLog;
 
-        public FurnitureController(Furniture furniture, IView<Furniture> view, World world, ILogController gameLog) : base(furniture, view, world)
+        public MapController(Furniture furniture, IView<Furniture> view, World world, ILogController gameLog) : base(furniture, view, world)
         {
             GameLog = gameLog;
         }
@@ -28,6 +28,12 @@ namespace Explorer.Controllers
 
         public override void Update(FrameContext frameContext)
         {
+
+            if (frameContext.LastPlayerAction == Infrastructure.Enums.Intent.RegenerateMap)
+            {
+                View.Clear();
+            }
+
             return;
         }
     }

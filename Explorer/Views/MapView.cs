@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Explorer.Views
 {
-    public class FurnitureView : IView<Furniture>
+    public class MapView : IView<Furniture>
     {
         private IGraphicsComponent Graphics;
 
-        public FurnitureView(IGraphicsComponent graphics)
+        public MapView(IGraphicsComponent graphics)
         {
             Graphics = graphics;
         }
@@ -36,7 +36,16 @@ namespace Explorer.Views
             {
                 Graphics.Write(model.X, model.Y, " ", Color4.DarkBlue);
             }
+        }
 
+        public void Clear()
+        {
+            Graphics.Clear();
+        }
+
+        public void Clear(Furniture model)
+        {
+            Graphics.Clear();
         }
     }
 }
