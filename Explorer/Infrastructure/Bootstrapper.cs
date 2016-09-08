@@ -21,41 +21,78 @@ namespace Explorer.Infrastructure
 
         public static Engine Start()
         {
-            Container.RegisterInstance<ConsoleWindow>(c => new ConsoleWindow(80, 220, "Explorer"));
-            Container.Register<IGraphicsComponent, AsciiGraphicsComponent>();
+            Container
+                .For<ConsoleWindow>()
+                .Provide(c => new ConsoleWindow(80, 220, "Explorer"))
+                .AsSingleton();
 
-            Container.RegisterInstance<Player>(c =>
-            {
-                return new Player() { X = 10, Y = 15, EnergyDelta = 500 };
-            });
+            Container
+                .For<IGraphicsComponent>()
+                .Provide<AsciiGraphicsComponent>();
 
-            Container.Register<ITileFactory, NaturalCaveCaTileFactory>();
+            Container
+                .For<Player>()
+                .Provide(c =>
+                {
+                    return new Player() { X = 10, Y = 15, EnergyDelta = 500 };
+                }).AsSingleton();
 
-            Container.RegisterInstance<World>(c =>
-            {
-                var world = new World();
-                world.Player = c.Resolve<Player>();
-                world.Map = MapLoader.LoadMap(c.Resolve<ITileFactory>());
-                return world;
-            });
+            Container.For<ITileFactory>().Provide<NaturalCaveCaTileFactory>();
 
-            Container.Register<IInputHandler, InputHandler>();
-            Container.Register<IView<Creature>, MonsterView>();
-            Container.Register<IView<Player>, PlayerView>();
-            Container.Register<IView<Furniture>, MapView>();
-            Container.Register<IView<GameLog>, GameLogView>();
-            Container.Register<IFovStrategy, AlwaysVisibleFovStrategy>();
-            
-            Container.Register<PlayerController, PlayerController>();
+            Container.For<World>()
+                .Provide(c =>
+                {
+                    var world = new World();
+                    world.Player = c.Resolve<Player>();
+                    world.Map = MapLoader.LoadMap(c.Resolve<ITileFactory>());
+                    return world;
+                }).AsSingleton();
 
-            Container.RegisterInstance<GameLog>(c =>
-            {
-                return new GameLog { X = 1, Y = 60 };
-            });
+            Container
+                .For<IInputHandler>()
+                .Provide<InputHandler>();
 
-            Container.Register<ILogController, GameLogController>();
-            Container.Register<IMoveHelper, EntityMoveHelper>();
-            Container.Register<Engine, Engine>();
+            Container
+                .For<IView<Creature>>()
+                .Provide<MonsterView>();
+
+            Container
+                .For<IView<Player>>()
+                .Provide<PlayerView>();
+
+            Container
+                .For<IView<Furniture>>()
+                .Provide<MapView>();
+
+            Container
+                .For<IView<GameLog>>()
+                .Provide<GameLogView>();
+
+            Container
+                .For<IFovStrategy>()
+                .Provide<AlwaysVisibleFovStrategy>();
+
+            Container
+                .For<PlayerController>()
+                .Provide<PlayerController>();
+
+            Container
+                .For<GameLog>()
+                .Provide(c => new GameLog { X = 1, Y = 60 })
+                .AsSingleton();
+
+            Container
+                .For<ILogController>()
+                .Provide<GameLogController>();
+
+            Container
+                .For<IMoveHelper>()
+                .Provide<EntityMoveHelper>();
+
+            Container
+                .For<Engine>()
+                .Provide<Engine>()
+                .AsSingleton();
 
             var monsters = new List<Creature>()
             {
